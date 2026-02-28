@@ -6,6 +6,9 @@ extends CharacterBody2D
 
 # 设定的速度
 const SPEED = 100.0
+# 常量，代表准星距离小猫的像素距离
+# Sprout Lands 的格子通常是 16x16，如果格子更大，可以改成 32
+const ACTION_DISTANCE = 16.0
 
 func _physics_process(delta):
 	# 1. 获取键盘按键的方向
@@ -24,27 +27,35 @@ func _physics_process(delta):
 	if Input.is_key_pressed(KEY_B):
 		build_ground()
 
-
-# 专门负责判断方向并播放动画的函数
+# 专门负责判断方向、播放动画，并移动准星的函数
 func update_animation(dir: Vector2):
-	# 如果没有按方向键 (dir 是 0,0)，就播放发呆动画
+	# 注意：当 dir == Vector2.ZERO（松开键盘）时，我们不改变准星位置
+	# 这样哪怕小猫停下来发呆，准星依然会保留在它最后面朝的方向！
 	if dir == Vector2.ZERO:
 		animated_sprite.play("idle")
 	else:
-		# 判断是横向移动多，还是纵向移动多 (防止斜着走时动画抽搐)
 		if abs(dir.x) > abs(dir.y):
-			# 横向移动：判断是向右还是向左
+			# === 横向移动 ===
 			if dir.x > 0:
 				animated_sprite.play("walk_right")
-				animated_sprite.flip_h = false
+				animated_sprite.flip_h = false 
+				# 【新魔法】：面朝右，准星移到右边！
+				action_point.position = Vector2(ACTION_DISTANCE, 0)
 			else:
 				animated_sprite.play("walk_left")
+				# 【新魔法】：面朝左，准星移到左边！
+				action_point.position = Vector2(-ACTION_DISTANCE, 0)
 		else:
-			# 纵向移动：判断是向下还是向上
+			# === 纵向移动 ===
 			if dir.y > 0:
 				animated_sprite.play("walk_down")
+				# 【新魔法】：面朝下，准星移到下边！
+				action_point.position = Vector2(0, ACTION_DISTANCE)
 			else:
 				animated_sprite.play("walk_up")
+				# 【新魔法】：面朝上，准星移到上边！
+				action_point.position = Vector2(0, -ACTION_DISTANCE)
+
 
 func dig_ground():
 	var tilemap = get_parent().get_node_or_null("TileMapLayer")
