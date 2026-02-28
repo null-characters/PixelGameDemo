@@ -1,0 +1,122 @@
+<!DOCTYPE html><html><head>
+      <title>游戏策划</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="file:////Users/fengbing/.vscode/extensions/shd101wyy.markdown-preview-enhanced-0.8.20/crossnote/dependencies/katex/katex.min.css">
+      
+      
+      
+      
+      
+      <style>
+      code[class*=language-],pre[class*=language-]{color:#333;background:0 0;font-family:Consolas,"Liberation Mono",Menlo,Courier,monospace;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.4;-moz-tab-size:8;-o-tab-size:8;tab-size:8;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none}pre[class*=language-]{padding:.8em;overflow:auto;border-radius:3px;background:#f5f5f5}:not(pre)>code[class*=language-]{padding:.1em;border-radius:.3em;white-space:normal;background:#f5f5f5}.token.blockquote,.token.comment{color:#969896}.token.cdata{color:#183691}.token.doctype,.token.macro.property,.token.punctuation,.token.variable{color:#333}.token.builtin,.token.important,.token.keyword,.token.operator,.token.rule{color:#a71d5d}.token.attr-value,.token.regex,.token.string,.token.url{color:#183691}.token.atrule,.token.boolean,.token.code,.token.command,.token.constant,.token.entity,.token.number,.token.property,.token.symbol{color:#0086b3}.token.prolog,.token.selector,.token.tag{color:#63a35c}.token.attr-name,.token.class,.token.class-name,.token.function,.token.id,.token.namespace,.token.pseudo-class,.token.pseudo-element,.token.url-reference .token.variable{color:#795da3}.token.entity{cursor:help}.token.title,.token.title .token.punctuation{font-weight:700;color:#1d3e81}.token.list{color:#ed6a43}.token.inserted{background-color:#eaffea;color:#55a532}.token.deleted{background-color:#ffecec;color:#bd2c00}.token.bold{font-weight:700}.token.italic{font-style:italic}.language-json .token.property{color:#183691}.language-markup .token.tag .token.punctuation{color:#333}.language-css .token.function,code.language-css{color:#0086b3}.language-yaml .token.atrule{color:#63a35c}code.language-yaml{color:#183691}.language-ruby .token.function{color:#333}.language-markdown .token.url{color:#795da3}.language-makefile .token.symbol{color:#795da3}.language-makefile .token.variable{color:#183691}.language-makefile .token.builtin{color:#0086b3}.language-bash .token.keyword{color:#0086b3}pre[data-line]{position:relative;padding:1em 0 1em 3em}pre[data-line] .line-highlight-wrapper{position:absolute;top:0;left:0;background-color:transparent;display:block;width:100%}pre[data-line] .line-highlight{position:absolute;left:0;right:0;padding:inherit 0;margin-top:1em;background:hsla(24,20%,50%,.08);background:linear-gradient(to right,hsla(24,20%,50%,.1) 70%,hsla(24,20%,50%,0));pointer-events:none;line-height:inherit;white-space:pre}pre[data-line] .line-highlight:before,pre[data-line] .line-highlight[data-end]:after{content:attr(data-start);position:absolute;top:.4em;left:.6em;min-width:1em;padding:0 .5em;background-color:hsla(24,20%,50%,.4);color:#f4f1ef;font:bold 65%/1.5 sans-serif;text-align:center;vertical-align:.3em;border-radius:999px;text-shadow:none;box-shadow:0 1px #fff}pre[data-line] .line-highlight[data-end]:after{content:attr(data-end);top:auto;bottom:.4em}html body{font-family:'Helvetica Neue',Helvetica,'Segoe UI',Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ol,html body>ul{margin-bottom:16px}html body ol,html body ul{padding-left:2em}html body ol.no-list,html body ul.no-list{padding:0;list-style-type:none}html body ol ol,html body ol ul,html body ul ol,html body ul ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;background-color:#f0f0f0;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:700;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:700}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::after,html body code::before{letter-spacing:-.2em;content:'\00a0'}html body pre>code{padding:0;margin:0;word-break:normal;white-space:pre;background:0 0;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:after,html body pre code:before,html body pre tt:after,html body pre tt:before{content:normal}html body blockquote,html body dl,html body ol,html body p,html body pre,html body ul{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body code,html body pre{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview ul{list-style:disc}.markdown-preview ul ul{list-style:circle}.markdown-preview ul ul ul{list-style:square}.markdown-preview ol{list-style:decimal}.markdown-preview ol ol,.markdown-preview ul ol{list-style-type:lower-roman}.markdown-preview ol ol ol,.markdown-preview ol ul ol,.markdown-preview ul ol ol,.markdown-preview ul ul ol{list-style-type:lower-alpha}.markdown-preview .newpage,.markdown-preview .pagebreak{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center!important}.markdown-preview:not([data-for=preview]) .code-chunk .code-chunk-btn-group{display:none}.markdown-preview:not([data-for=preview]) .code-chunk .status{display:none}.markdown-preview:not([data-for=preview]) .code-chunk .output-div{margin-bottom:16px}.markdown-preview .md-toc{padding:0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link div,.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link p{display:inline}.markdown-preview .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,.66);border:4px solid rgba(150,150,150,.66);background-clip:content-box}html body[for=html-export]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0;min-height:100vh}@media screen and (min-width:914px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{font-size:14px!important;padding:1em}}@media print{html body[for=html-export]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for=html-export]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,.66);border:4px solid rgba(150,150,150,.66);background-clip:content-box}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc{padding:0 16px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link div,html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link p{display:inline}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% - 300px);padding:2em calc(50% - 457px - 300px / 2);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for=html-export]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for=html-export]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+
+      </style>
+      <!-- The content below will be included at the end of the <head> element. --><script type="text/javascript">
+  document.addEventListener("DOMContentLoaded", function () {
+    // your code here
+  });
+</script></head><body for="html-export">
+    
+    
+      <div class="crossnote markdown-preview  ">
+      
+<h1 id="废土花开wasteland-bloom-概念设计草案-v20">《废土花开》(Wasteland Bloom) 概念设计草案 v2.0 </h1>
+<h2 id="一--游戏概述-overview">一、 游戏概述 (Overview) </h2>
+<ul>
+<li><strong>游戏名称</strong>：废土花开 (Wasteland Bloom)</li>
+<li><strong>游戏类型</strong>：2D 俯视角 / 废土生存 / 异星种田 / 动作 RPG</li>
+<li><strong>核心体验</strong>：在危机四伏的辐射废土中，建立最后一片纯净的绿洲。</li>
+</ul>
+<h2 id="二--视觉基调与世界观-tone--lore">二、 视觉基调与世界观 (Tone &amp; Lore) </h2>
+<h3 id="1-世界观背景">1. 世界观背景 </h3>
+<p>几十年前，异星孢子舰队降临，人类节节败退，最终启动“全球核平”协议。异星生物大军与旧人类文明同归于尽。核辐射与外星基因混合，导致幸存的新人类基因重组，呈现出具有动物特征的“兽化人”（毛茸茸的耳朵、尾巴、局部兽化，兼具野性与人类理智）。</p>
+<h3 id="2-画风反差美学">2. 画风反差美学 </h3>
+<ul>
+<li><strong>安全区（庇护所）</strong>：采用温暖的暖色调，充满生机、清澈的水源、绿色的变异植物，营造出末日中温馨避风港的氛围。</li>
+<li><strong>危险区（核爆/外星污染区）</strong>：采用阴暗压抑的冷色调，空气中漂浮着荧光绿色的辐射尘埃，扭曲的废铁与紫色的异星菌毯交织，充满未知与极端的生存压力。</li>
+</ul>
+<h2 id="三--核心玩法循环-core-gameplay-loop">三、 核心玩法循环 (Core Gameplay Loop) </h2>
+<p>我们要打破传统的“纯种田”模式，引入**“种田即武装，收获即扩张”<strong>的核心理念。<br>
+游戏的宏观核心循环为：</strong>【庇护所发育】 ↔ 【废土探索战斗】 ↔ 【净化与扩张】**。</p>
+<h3 id="1-异星废土种田-mutation-farming">1. 异星废土种田 (Mutation Farming) </h3>
+<p>在废土中，种植的不再是普通农作物，而是对抗末日的武器、工具和生存必需品：</p>
+<ul>
+<li><strong>生存补给（血浆果/结晶麦）</strong>：基础生存作物，用于填饱肚子、恢复体力、酿造基础抗辐射药剂。</li>
+<li><strong>战斗植株（防守）</strong>：如“荆棘地雷”、“酸液炮仗花”。种植在庇护所边缘，成熟后用于抵御夜晚游荡的辐射怪物。</li>
+<li><strong>共生武备（进攻）</strong>：如“藤蔓鞭”、“孢子散弹枪”。成熟后可拔出作为主角出门探索的武器（武器带有耐久度，耗尽后需要重新种植培育）。</li>
+</ul>
+<h3 id="2-探索与战斗-exploration--combat">2. 探索与战斗 (Exploration &amp; Combat) </h3>
+<ul>
+<li><strong>辐射浓度限制</strong>：庇护所外围按危险程度分为“轻度辐射区”、“重度辐射区”和“核爆中心”。主角初期的抗辐射能力仅限在轻度区探索，必须通过种田收集材料，制作更高级的抗辐射药剂，才能逐步深入高危区域。</li>
+<li><strong>拾荒与搜刮</strong>：在野外击败旧时代变异怪物（如多肢畸形人、外星节肢动物），搜刮旧人类遗留的高科技零件（用于升级庇护所水泵、发电机等基建设施）和未知的异星植物种子。</li>
+</ul>
+<h3 id="3-终极目标生态净化-the-purge">3. 终极目标：生态净化 (The Purge) </h3>
+<ul>
+<li><strong>净化节点核心机制</strong>：废土被充满毒气的“战争迷雾”笼罩。玩家需要在探索中寻找被重度污染的土地节点，并种下极其稀有的**“源生净化树”**。</li>
+<li><strong>净化仪式与正反馈</strong>：种下“源生净化树”后，它需要经过完整的 7 天（游戏时间）才能彻底长成。在这 7 天里，玩家每天不仅要照顾家里的作物，还要每天跑到前线给这棵神树浇“高能纯水”，或者驱赶周围试图啃食它的变异虫子。当第 7 天到来，这棵树轰然绽放光芒，周围一圈刺眼的辐射尘埃散去，露出绿色的新草地——带来极强的正反馈与治愈感。</li>
+<li>随着净化树的生长与成熟，周围的辐射会逐渐退散，土地得到净化，庇护所的安全面积随之扩大。游戏的最终目标是一步步推进净化至核爆中心，彻底唤醒沉睡的大地。</li>
+</ul>
+<h2 id="四--核心机制深化时间系统与种田体验-time-system--farming-experience">四、 核心机制深化：时间系统与种田体验 (Time System &amp; Farming Experience) </h2>
+<p>引入时间系统（日历/季节/昼夜）是保护“种田体验”最核心的护城河，为游戏赋予“期待感”和“规划感”。</p>
+<ul>
+<li><strong>舒适的时间（庇护所内）</strong>：土地净化后，内部是完全安全的。时间流逝，作物按天成长，白天睡觉还是晚上活动完全由玩家决定。玩家可以花几十天在家里慢悠悠地培育稀有花朵，永远没有变异怪物会主动打进安全的家（不强迫防守），享受“早上起来先浇一圈水”的仪式感。</li>
+<li><strong>高压的时间（废土外层）</strong>：废土上的污染存在夜晚辐射潮汐。白天出去探险拾荒比较安全，怪物迟钝；到了晚上，怪物狂暴，辐射浓度上升，逼着玩家在天黑前必须跑回庇护所睡觉。这样既有了生存压迫感，又保留了种田的安逸老巢。</li>
+</ul>
+<h2 id="五--后期愿景与游戏格局-late-game-scope--vision">五、 后期愿景与游戏格局 (Late-game Scope &amp; Vision) </h2>
+<p>坚守“小而美”的开发理念，走“搜救与和平”路线，避免陷入庞大复杂的 4X 战略泥潭。</p>
+<ul>
+<li><strong>搜救与招募</strong>：设定世界上确实有其他庇护所，但大家都是在末日里苦苦挣扎的可怜人。随着玩家在地图上不断用变异植物净化土地，可以接触到其他流浪的兽化人（NPC），并招募他们回到初始庇护所。</li>
+<li><strong>聚落建设</strong>：NPC 能解锁新的建筑、新的种植配方，或者帮忙自动收菜、抵御外星怪物的骚扰。最终，玩家把一个破败的废弃矿洞，变成了一个充满各个种族、热热闹闹的《动物森友会》式安全区，达成正统的“种田流”大结局。</li>
+</ul>
+<h2 id="六--市场定位与品类创新-market-positioning">六、 市场定位与品类创新 (Market Positioning) </h2>
+<p>本游戏主打**“品类微创新”**，将“废土的压抑”和“Furry 的可爱”、“种田的安逸”和“外星辐射的危险”做成动态平衡。</p>
+<ul>
+<li><strong>区别于《Atomicrops (原子作物)》</strong>：后者是硬核肉鸽弹幕射击，本作更强调“庇护所的治愈感”。</li>
+<li><strong>区别于《波西亚时光 / 沙石镇时光》</strong>：后者是完全和平的后启示录过家家，本作保留了“对抗外星辐射、净化土地”的生存压迫感。<br>
+完全原创的美术素材和剧情文本将成为游戏突围的黄金法则。</li>
+</ul>
+<h2 id="七--角色与特质系统-furry-traits-system">七、 角色与特质系统 (Furry Traits System) </h2>
+<p>基于“兽化人”的设定，引入“基因特质”系统，为玩家提供多样化的开局与成长流派：</p>
+<ul>
+<li><strong>🐱 猫科基因</strong>：移动速度 +15%，夜晚拥有更广的视野（适合夜间潜行探索与拾荒）。</li>
+<li><strong>🐻 熊科基因</strong>：挥舞工具/武器的伤害 +20%，能够搬动废土上的重型废铁障碍物，打通捷径。</li>
+<li><strong>🐰 兔科/鼠科基因</strong>：种植作物生长速度 +10%，在挖掘时更容易发现地下的稀有种子或隐藏物资（与当前 Demo 的小白兔角色完美契合）。</li>
+</ul>
+<hr>
+<h2 id="八--godot-落地-implementation-guide">八、 Godot 落地 (Implementation Guide) </h2>
+<p>这套方案虽然有着丰富的拓展性，但在 Godot 引擎中的底层实现逻辑非常清晰，非常适合基于当前的小白兔 Demo 逐步迭代开发：</p>
+<ol>
+<li><strong>地形系统 (TileMap)</strong>
+<ul>
+<li>使用 TileMap 的多层（Layers）或不同的 Terrain Set，用来区分“健康土地”、“可耕种土地”和“辐射污染土地”。</li>
+</ul>
+</li>
+<li><strong>种田系统 (Grid-based Inventory &amp; Timer)</strong>
+<ul>
+<li>现有的 <code>set_cells_terrain_connect</code> 挖填草地机制是极佳的种田系统地基。</li>
+<li><strong>落地步骤</strong>：引入时间机制（Timer 组件），结合状态机管理植物的不同阶段（种子 -&gt; 幼苗 -&gt; 成熟 -&gt; 枯萎/收获），并绑定对应的贴图变化。</li>
+</ul>
+</li>
+<li><strong>战斗与交互系统 (CharacterBody2D / Hitboxes)</strong>
+<ul>
+<li>在已有的 8 向移动系统基础上，延伸出攻击和受击判定（Area2D / Hitbox / Hurtbox）。</li>
+<li>武器作为独立场景或节点挂载在玩家角色上，通过动画状态机（AnimationTree / AnimationPlayer）驱动攻击与采集动作。</li>
+</ul>
+</li>
+</ol>
+
+      </div>
+      
+      
+    
+    
+    
+    
+    
+    
+  
+    </body></html>
