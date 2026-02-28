@@ -2,6 +2,14 @@ extends CharacterBody2D
 class_name Player
 
 # ==========================================
+# 信号 (Signals)
+# ==========================================
+signal hp_changed(current: float, maximum: float)
+signal stamina_changed(current: float, maximum: float)
+signal radiation_changed(current: float, maximum: float)
+signal player_died()
+
+# ==========================================
 # 节点引用
 # ==========================================
 @onready var animated_sprite = $AnimatedSprite2D
@@ -18,6 +26,34 @@ const ACTION_DISTANCE: float = 16.0
 # 预留给任务 1 的三个种族预设 (MVP 阶段先用 Enum 区分)
 enum Species { CAT, BEAR, RABBIT }
 @export var current_species: Species = Species.CAT
+
+# ==========================================
+# 生存属性
+# ==========================================
+@export var max_hp: float = 100.0
+@export var max_stamina: float = 100.0
+@export var max_radiation: float = 100.0
+
+var current_hp: float
+var current_stamina: float
+var current_radiation: float  # 0 = 健康，100 = 辐射病
+
+# 每秒体力恢复速率
+@export var stamina_regen_rate: float = 5.0
+# 每秒体力消耗速率（跑步时）
+@export var stamina_drain_rate: float = 10.0
+
+# ==========================================
+# 初始化
+# ==========================================
+func _ready() -> void:
+    # 添加到 player 组，以便 HUD 可以找到
+    add_to_group("player")
+    
+    # 初始化属性为最大值
+    current_hp = max_hp
+    current_stamina = max_stamina
+    current_radiation = 0.0
 
 # ==========================================
 # 物理帧更新 (移动逻辑)
@@ -110,3 +146,63 @@ func build_ground() -> void:
         # 如果返回值是 -1，说明这个格子是空的
         if tilemap.get_cell_source_id(grid_pos) == -1:
             tilemap.set_cells_terrain_connect([grid_pos], 0, 0)
+
+# ==========================================
+# 属性修改函数
+# ==========================================
+
+## 受到伤害
+func take_damage(amount: float) -> void:
+    current_hp = max(0.0, current_hp - amount)
+    hp_changed.emit(current_hp, max_hp)
+    
+    if current_hp <= 0.0:
+        player_died.emit()
+        print("玩家死亡！")
+
+## 恢复生命值
+func heal(amount: float) -> void:
+    current_hp = min(max_hp, current_hp + amount)
+    hp_changed.emit(current_hp, max_hp)
+
+## 消耗体力
+func consume_stamina(amount: float) -> bool:
+    if current_stamina < amount:
+        return false  # 体力不足
+    current_stamina = max(0.0, current_stamina - amount)
+    stamina_changed.emit(current_stamina, max_stamina)
+    return true
+
+## 恢复体力
+func recover_stamina(amount: float) -> void:
+    current_stamina = min(max_stamina, current_stamina + amount)
+    stamina_changed.emit(current_stamina, max_stamina)
+
+## 自然恢复体力（每帧调用）
+func _regen_stamina(delta: float) -> void:
+    if current_stamina < max_stamina:
+        recover_stamina(stamina_regen_rate * delta)
+
+## 增加辐射值
+func increase_radiation(amount: float) -> void:
+    current_radiation = min(max_radiation, current_radiation + amount)
+    radiation_changed.emit(current_radiation, max_radiation)
+    
+    # 辐射过高时扣除生命值
+    if current_radiation >= max_radiation:
+        take_damage(1.0 * get_physics_process_delta_time())
+
+## 降低辐射值
+func decrease_radiation(amount: float) -> void:
+    current_radiation = max(0.0, current_radiation - amount)
+    radiation_changed.emit(current_radiation, max_radiation)
+
+## 获取当前属性比例 (0.0 - 1.0)
+func get_hp_ratio() -> float:
+    return current_hp / max_hp if max_hp > 0 else 0.0
+
+func get_stamina_ratio() -> float:
+    return current_stamina / max_stamina if max_stamina > 0 else 0.0
+
+func get_radiation_ratio() -> float:
+    return current_radiation / max_radiation if max_radiation > 0 else 0.0

@@ -59,17 +59,46 @@
 - 将其注册为全局单例 (Autoload)。
 - 实现了核心时间魔法：现实 10 分钟映射为游戏内 1 天，精确发送 `time_tick`、`day_advanced`、`time_of_day_changed` 等信号，供后续的光照、UI 和植物生长系统监听。
 
+**5. 扩展玩家基础属性与 UI (Task 3: Player Stats & HUD)**
+- 在 `Player.gd` 中添加了三个核心生存属性：
+  - `HP (生命值)` - 默认 100，受到伤害时减少
+  - `Stamina (体力值)` - 默认 100，用于行动消耗
+  - `Radiation (辐射值)` - 默认 0，过高时持续扣血
+- 添加了属性变化信号：`hp_changed`, `stamina_changed`, `radiation_changed`, `player_died`
+- 添加了属性修改函数：`take_damage()`, `heal()`, `consume_stamina()`, `recover_stamina()`, `increase_radiation()`, `decrease_radiation()`
+- 创建了 `scenes/ui/HUD.tscn` 和 `HUD.gd`：
+  - 左上角状态框：三条属性进度条（HP/体力/辐射）
+  - 右上角时间框：显示当前天数和时间
+  - 自动查找玩家并连接属性变化信号
+  - 监听 TimeManager 更新时间显示
+- 在 `main.tscn` 中添加了 HUD 节点实例
+
+**6. HUD 界面优化**
+- 调整布局：状态框在左上角，时间框在右上角
+- 尺寸优化：属性条从 200x20 缩小到 100x12，字体设为 8px
+- 背景框样式：使用 `StyleBoxFlat` 创建半透明圆角背景
+  - 状态框：75% 不透明度深色背景 + 边框
+  - 时间框：40% 不透明度更透明效果
+- 属性条渐变色效果：
+  - HP：亮红 → 暗红（根据血量比例）
+  - Stamina：亮绿 → 暗绿（根据体力比例）
+  - Radiation：绿（安全）→ 黄（警告）→ 红（危险）三色渐变
+- 添加测试模式：`test_mode = true` 时自动循环测试属性条变化
+
 ## 四、 当前项目状态树 (Current Project Structure)
 ```text
 res://
 ├── project.godot               # 已配置好分辨率、缩放、输入映射、自动加载
-├── main.tscn                   # 测试用主场景（包含基础草地 TileMap 和 Player）
+├── main.tscn                   # 测试用主场景（包含基础草地 TileMap、Player 和 HUD）
 ├── autoload/
 │   └── TimeManager.gd          # 【已完成】全局时间单例
 ├── scenes/
-│   └── player/
-│       ├── Player.tscn         # 【已完成】主角场景
-│       └── Player.gd           # 【已完成】8向移动与基础属性预留脚本
+│   ├── player/
+│   │   ├── Player.tscn         # 【已完成】主角场景
+│   │   └── Player.gd           # 【已完成】8向移动与生存属性系统
+│   └── ui/
+│       ├── HUD.tscn            # 【已完成】主界面 HUD 场景
+│       └── HUD.gd              # 【已完成】HUD 控制脚本
 ├── assets/                     # 存放各类贴图与素材
 └── docs/                       # 项目文档目录
     ├── prompt.md               # 开发上下文与流程记录
@@ -80,14 +109,14 @@ res://
 
 ## 五、 下一步开发指南 (Next Steps)
 接下来的开发工作请严格按照 `tasks_01.md` 的顺延任务进行：
-1. **执行任务 3：扩展玩家基础属性与 UI**
-   - 在 `Player.gd` 中补充 HP/Stamina/Radiation。
-   - 制作 `HUD.tscn`，订阅 `TimeManager` 的信号来更新时间显示。
-2. **执行任务 4：Furry 元素轻量化表现**
+1. **执行任务 4：Furry 元素轻量化表现**
    - 给 `Player` 加入 AnimationPlayer，实现待机、呼吸、舔爪等特定行为。
-3. **执行任务 5：坚决手搓 MVP 关卡地图**
+2. **执行任务 5：坚决手搓 MVP 关卡地图**
    - 清理 `main.tscn`，或者新建 `world/map_01.tscn`。
    - 使用现有的素材画出一个左侧农田、右侧辐射区的微型测试场。
+3. **执行任务 6：建立交互框架**
+   - 为玩家添加交互检测区域 (Area2D / RayCast2D)。
+   - 实现对周围环境、工作台、土地的检测与交互判定。
 
 ---
 **AI 阅读提示**：

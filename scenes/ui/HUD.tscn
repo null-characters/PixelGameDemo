@@ -1,0 +1,136 @@
+[gd_scene load_steps=4 format=3 uid="uid://dhudhm8gqplne"]
+
+[ext_resource type="Script" path="res://scenes/ui/HUD.gd" id="1_hud"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_background"]
+bg_color = Color(0.1, 0.1, 0.12, 0.75)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+border_color = Color(0.4, 0.4, 0.4, 0.5)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_time_background"]
+bg_color = Color(0.1, 0.1, 0.12, 0.4)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+border_color = Color(0.4, 0.4, 0.4, 0.3)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_hud")
+
+[node name="StatsContainer" type="MarginContainer" parent="."]
+anchors_preset = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 130.0
+offset_bottom = 60.0
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 4
+
+[node name="PanelContainer" type="PanelContainer" parent="StatsContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_background")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="StatsContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="HPBar" type="ProgressBar" parent="StatsContainer/PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(100, 12)
+layout_mode = 2
+max_value = 100.0
+value = 100.0
+show_percentage = false
+
+[node name="Label" type="Label" parent="StatsContainer/PanelContainer/VBoxContainer/HPBar"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 1.0
+text = "HP 100/100"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 8
+
+[node name="StaminaBar" type="ProgressBar" parent="StatsContainer/PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(100, 12)
+layout_mode = 2
+max_value = 100.0
+value = 100.0
+show_percentage = false
+
+[node name="Label" type="Label" parent="StatsContainer/PanelContainer/VBoxContainer/StaminaBar"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 1.0
+text = "STA 100/100"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 8
+
+[node name="RadiationBar" type="ProgressBar" parent="StatsContainer/PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(100, 12)
+layout_mode = 2
+max_value = 100.0
+value = 0.0
+show_percentage = false
+
+[node name="Label" type="Label" parent="StatsContainer/PanelContainer/VBoxContainer/RadiationBar"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 1.0
+text = "RAD 0/100"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 8
+
+[node name="TimeContainer" type="MarginContainer" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -80.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = 46.0
+grow_horizontal = 0
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 4
+
+[node name="PanelContainer" type="PanelContainer" parent="TimeContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_time_background")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TimeContainer/PanelContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="DayLabel" type="Label" parent="TimeContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Day 1"
+horizontal_alignment = 2
+theme_override_font_sizes/font_size = 8
+
+[node name="TimeLabel" type="Label" parent="TimeContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "08:00"
+horizontal_alignment = 2
+theme_override_font_sizes/font_size = 8

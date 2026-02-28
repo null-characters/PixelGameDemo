@@ -1,7 +1,8 @@
-[gd_scene format=4 uid="uid://brw8eh6uybe0"]
+[gd_scene load_steps=4 format=4 uid="uid://brw8eh6uybe0"]
 
 [ext_resource type="Texture2D" uid="uid://cgtl37gtjyu2g" path="res://assets/Grass.png" id="1_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://b5x5f1eoy6abc" path="res://scenes/player/Player.tscn" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://dhudhm8gqplne" path="res://scenes/ui/HUD.tscn" id="3_hud"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_h2yge"]
 texture = ExtResource("1_0xm2m")
@@ -197,3 +198,5 @@ tile_set = SubResource("TileSet_1bvp3")
 
 [node name="Player" parent="." unique_id=1169496820 instance=ExtResource("1_ig7tw")]
 position = Vector2(-8, 34)
+
+[node name="HUD" parent="." instance=ExtResource("3_hud")]
