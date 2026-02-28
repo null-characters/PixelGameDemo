@@ -89,16 +89,17 @@
 ```text
 res://
 ├── project.godot               # 已配置好分辨率、缩放、输入映射、自动加载
-├── main.tscn                   # 测试用主场景（包含基础草地 TileMap、Player 和 HUD）
 ├── autoload/
 │   └── TimeManager.gd          # 【已完成】全局时间单例
 ├── scenes/
 │   ├── player/
 │   │   ├── Player.tscn         # 【已完成】主角场景
 │   │   └── Player.gd           # 【已完成】8向移动与生存属性系统
-│   └── ui/
-│       ├── HUD.tscn            # 【已完成】主界面 HUD 场景
-│       └── HUD.gd              # 【已完成】HUD 控制脚本
+│   ├── ui/
+│   │   ├── HUD.tscn            # 【已完成】主界面 HUD 场景
+│   │   └── HUD.gd              # 【已完成】HUD 控制脚本
+│   └── world/
+│       └── map_01.tscn         # 【已完成】手搓 MVP 关卡地图
 ├── assets/                     # 存放各类贴图与素材
 └── docs/                       # 项目文档目录
     ├── prompt.md               # 开发上下文与流程记录
@@ -111,9 +112,9 @@ res://
 接下来的开发工作请严格按照 `tasks_01.md` 的顺延任务进行：
 1. **执行任务 4：Furry 元素轻量化表现**
    - 给 `Player` 加入 AnimationPlayer，实现待机、呼吸、舔爪等特定行为。
-2. **执行任务 5：坚决手搓 MVP 关卡地图**
-   - 清理 `main.tscn`，或者新建 `world/map_01.tscn`。
-   - 使用现有的素材画出一个左侧农田、右侧辐射区的微型测试场。
+2. **执行任务 5：完善 MVP 关卡地图**
+   - 使用现有的素材完善 `scenes/world/map_01.tscn`。
+   - 画出一个左侧农田、右侧辐射区的微型测试场。
 3. **执行任务 6：建立交互框架**
    - 为玩家添加交互检测区域 (Area2D / RayCast2D)。
    - 实现对周围环境、工作台、土地的检测与交互判定。
