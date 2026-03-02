@@ -85,6 +85,21 @@
   - Radiation：绿（安全）→ 黄（警告）→ 红（危险）三色渐变
 - 添加测试模式：`test_mode = true` 时自动循环测试属性条变化
 
+**7. 手搓 MVP 关卡地图 (Task 5: map_01.tscn)**
+- 创建了 `scenes/world/map_01.tscn` 和 `map_01.gd` 地图脚本
+- 实现多层 TileMapLayer 架构：
+  - `BaseLayer`：腐败土地层（使用 modulate 调色为紫黑色调）
+  - `ObstacleLayer`：障碍物层（带物理碰撞）
+  - `PurifiedLayer`：净化土地层（初始隐藏，用于净化翻转效果）
+- 地图布局（横向结构）：
+  - 左侧：庇护所区域（玩家出生点）
+  - 中间：农田区域（预留种植系统）
+  - 右侧：净化路径（随机障碍物）
+  - 尽头：净化树位置（PurificationTree 标记点）
+- 地图尺寸：40×24 格（640×384 像素）
+- 预留净化翻转接口 `trigger_purification()`
+- 农田地块记录系统 `farm_plots` 字典
+
 ## 四、 当前项目状态树 (Current Project Structure)
 ```text
 res://
@@ -99,7 +114,8 @@ res://
 │   │   ├── HUD.tscn            # 【已完成】主界面 HUD 场景
 │   │   └── HUD.gd              # 【已完成】HUD 控制脚本
 │   └── world/
-│       └── map_01.tscn         # 【已完成】手搓 MVP 关卡地图
+│       ├── map_01.tscn         # 【已完成】手搓 MVP 关卡地图
+│       └── map_01.gd           # 【已完成】地图生成与净化翻转逻辑
 ├── assets/                     # 存放各类贴图与素材
 └── docs/                       # 项目文档目录
     ├── prompt.md               # 开发上下文与流程记录
@@ -112,12 +128,12 @@ res://
 接下来的开发工作请严格按照 `tasks_01.md` 的顺延任务进行：
 1. **执行任务 4：Furry 元素轻量化表现**
    - 给 `Player` 加入 AnimationPlayer，实现待机、呼吸、舔爪等特定行为。
-2. **执行任务 5：完善 MVP 关卡地图**
-   - 使用现有的素材完善 `scenes/world/map_01.tscn`。
-   - 画出一个左侧农田、右侧辐射区的微型测试场。
-3. **执行任务 6：建立交互框架**
+2. **执行任务 6：建立交互框架**
    - 为玩家添加交互检测区域 (Area2D / RayCast2D)。
    - 实现对周围环境、工作台、土地的检测与交互判定。
+3. **执行任务 7：背包与快捷栏**
+   - 实现背包系统基础数据结构。
+   - 创建 Hotbar UI。
 
 ---
 **AI 阅读提示**：
