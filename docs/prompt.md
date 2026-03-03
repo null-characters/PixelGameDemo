@@ -106,6 +106,15 @@
 - 修改了 `map_01.gd` 增加原始地图记录功能：
   - 游戏 `_ready` 时自动扫描并备份 `BaseLayer` 的所有初始图集配置信息。
 
+**9. 完善任务 5：添加刷怪点、资源点与扩展区域**
+- 在 `map_01.tscn` 中添加了完整的标记点系统：
+  - **SpawnPoints（刷怪点）**：3 个固定刷怪位置，带有 `enemy_type` 和 `spawn_delay` 元数据
+  - **ResourcePoints（资源点）**：3 个固定资源采集点，带有 `resource_type` 元数据
+  - **ExpansionZones（扩展区域）**：4 个未来可解锁的扩展地块标记，带有 `zone_name` 和 `unlock_condition` 元数据
+- 更新了 `map_01.gd`：
+  - 新增 `_cache_spawn_points()`、`_cache_resource_points()`、`_cache_expansion_zones()` 函数
+  - 提供 `get_spawn_points()`、`get_resource_points()`、`get_expansion_zones()` 公开接口供后续系统调用
+
 ## 四、 当前项目状态树 (Current Project Structure)
 ```text
 res://

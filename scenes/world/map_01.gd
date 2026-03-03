@@ -7,6 +7,9 @@ extends Node2D
 @onready var purified_layer: TileMapLayer = $PurifiedLayer
 @onready var purification_tree: Marker2D = $PurificationTree
 @onready var player_spawn: Marker2D = $PlayerSpawn
+@onready var spawn_points: Node2D = $SpawnPoints
+@onready var resource_points: Node2D = $ResourcePoints
+@onready var expansion_zones: Node2D = $ExpansionZones
 
 # 农田地块记录 (用于后续种植系统)
 var farm_plots: Dictionary = {}
@@ -15,10 +18,22 @@ var farm_plots: Dictionary = {}
 # 结构：{ Vector2i(x, y): {"source_id": int, "atlas_coords": Vector2i} }
 var original_terrain: Dictionary = {}
 
+# 刷怪点数据缓存
+var spawn_point_data: Array = []
+
+# 资源点数据缓存
+var resource_point_data: Array = []
+
+# 扩展区域数据缓存
+var expansion_zone_data: Array = []
+
 func _ready() -> void:
 	_init_farm_plots()
 	_record_original_terrain()
 	_setup_purification_tree()
+	_cache_spawn_points()
+	_cache_resource_points()
+	_cache_expansion_zones()
 
 ## 初始化农田地块记录
 func _init_farm_plots() -> void:
@@ -90,3 +105,51 @@ func get_farm_plot(pos: Vector2i) -> Dictionary:
 func update_farm_plot(pos: Vector2i, key: String, value: Variant) -> void:
 	if farm_plots.has(pos):
 		farm_plots[pos][key] = value
+
+## 缓存刷怪点数据
+func _cache_spawn_points() -> void:
+	if spawn_points:
+		for child in spawn_points.get_children():
+			if child is Marker2D:
+				spawn_point_data.append({
+					"position": child.global_position,
+					"enemy_type": child.get_meta("enemy_type", "basic"),
+					"spawn_delay": child.get_meta("spawn_delay", 30.0)
+				})
+		print("📍 缓存了 %d 个刷怪点" % spawn_point_data.size())
+
+## 缓存资源点数据
+func _cache_resource_points() -> void:
+	if resource_points:
+		for child in resource_points.get_children():
+			if child is Marker2D:
+				resource_point_data.append({
+					"position": child.global_position,
+					"resource_type": child.get_meta("resource_type", "stone")
+				})
+		print("💎 缓存了 %d 个资源点" % resource_point_data.size())
+
+## 缓存扩展区域数据
+func _cache_expansion_zones() -> void:
+	if expansion_zones:
+		for child in expansion_zones.get_children():
+			if child is Marker2D:
+				expansion_zone_data.append({
+					"position": child.global_position,
+					"zone_name": child.get_meta("zone_name", "unknown"),
+					"unlock_condition": child.get_meta("unlock_condition", "none")
+				})
+		print("🗺️ 缓存了 %d 个扩展区域" % expansion_zone_data.size())
+
+## 获取所有刷怪点数据 (供敌人生成系统调用)
+func get_spawn_points() -> Array:
+	return spawn_point_data
+
+## 获取所有资源点数据 (供资源系统调用)
+func get_resource_points() -> Array:
+	return resource_point_data
+
+## 获取所有扩展区域数据 (供地图扩展系统调用)
+func get_expansion_zones() -> Array:
+	return expansion_zone_data
+

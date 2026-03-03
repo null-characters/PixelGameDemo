@@ -285,3 +285,56 @@ position = Vector2(-250, 0)
 position = Vector2(-250, 0)
 
 [node name="HUD" parent="." unique_id=1485729906 instance=ExtResource("3_hud")]
+
+[node name="SpawnPoints" type="Node2D" parent="."]
+
+[node name="SpawnPoint1" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(150, -50)
+metadata/enemy_type = "basic"
+metadata/spawn_delay = 30.0
+
+[node name="SpawnPoint2" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(180, 30)
+metadata/enemy_type = "basic"
+metadata/spawn_delay = 45.0
+
+[node name="SpawnPoint3" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(200, -20)
+metadata/enemy_type = "elite"
+metadata/spawn_delay = 60.0
+
+[node name="ResourcePoints" type="Node2D" parent="."]
+
+[node name="ResourcePoint1" type="Marker2D" parent="ResourcePoints"]
+position = Vector2(100, 40)
+metadata/resource_type = "stone"
+
+[node name="ResourcePoint2" type="Marker2D" parent="ResourcePoints"]
+position = Vector2(120, -30)
+metadata/resource_type = "wood"
+
+[node name="ResourcePoint3" type="Marker2D" parent="ResourcePoints"]
+position = Vector2(160, 0)
+metadata/resource_type = "herb"
+
+[node name="ExpansionZones" type="Node2D" parent="."]
+
+[node name="ExpansionZone1" type="Marker2D" parent="ExpansionZones"]
+position = Vector2(-300, 0)
+metadata/zone_name = "west_expansion"
+metadata/unlock_condition = "purification_level_2"
+
+[node name="ExpansionZone2" type="Marker2D" parent="ExpansionZones"]
+position = Vector2(300, 0)
+metadata/zone_name = "east_expansion"
+metadata/unlock_condition = "purification_level_3"
+
+[node name="ExpansionZone3" type="Marker2D" parent="ExpansionZones"]
+position = Vector2(0, -150)
+metadata/zone_name = "north_expansion"
+metadata/unlock_condition = "purification_level_2"
+
+[node name="ExpansionZone4" type="Marker2D" parent="ExpansionZones"]
+position = Vector2(0, 150)
+metadata/zone_name = "south_expansion"
+metadata/unlock_condition = "purification_level_4"
