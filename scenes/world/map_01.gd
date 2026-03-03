@@ -8,111 +8,48 @@ extends Node2D
 @onready var purification_tree: Marker2D = $PurificationTree
 @onready var player_spawn: Marker2D = $PlayerSpawn
 
-# 地图配置
-const TILE_SIZE := 16
-const MAP_WIDTH := 40  # 横向40格 (640像素)
-const MAP_HEIGHT := 24  # 纵向24格 (384像素)
-
-# 区域划分 (横向)
-const SHELTER_END_X := -15      # 庇护所结束位置 (左侧)
-const FARM_START_X := -10       # 农田开始位置
-const FARM_END_X := 5           # 农田结束位置
-const PATH_END_X := 15          # 净化路径结束位置
-const TREE_X := 18              # 净化树位置
-
-# 地形类型
-enum TerrainType {
-	CORRUPT,     # 腐败土地
-	FARM,        # 农田
-	OBSTACLE,    # 障碍物
-	PURIFIED     # 净化土地
-}
-
 # 农田地块记录 (用于后续种植系统)
 var farm_plots: Dictionary = {}
 
+# 记录地图原始结构（用于挖地、填地时恢复）
+# 结构：{ Vector2i(x, y): {"source_id": int, "atlas_coords": Vector2i} }
+var original_terrain: Dictionary = {}
+
 func _ready() -> void:
-	_generate_map()
+	_init_farm_plots()
+	_record_original_terrain()
 	_setup_purification_tree()
 
-## 生成地图
-func _generate_map() -> void:
-	# 生成基础地形
-	for x in range(-MAP_WIDTH / 2, MAP_WIDTH / 2):
-		for y in range(-MAP_HEIGHT / 2, MAP_HEIGHT / 2):
-			var terrain = _get_terrain_at(x, y)
-			_set_tile(x, y, terrain)
+## 初始化农田地块记录
+func _init_farm_plots() -> void:
+	# 扫描 BaseLayer，找到所有农田地块并记录
+	var used_cells = base_layer.get_used_cells()
+	for cell in used_cells:
+		# 假设 source_id == 2 是可种植的土地（根据你的 TileSet 配置，source 2 是 Tilled Dirt）
+		if base_layer.get_cell_source_id(cell) == 2:
+			farm_plots[cell] = {"tilled": false, "watered": false}
 
-## 根据位置获取地形类型
-func _get_terrain_at(x: int, y: int) -> int:
-	# 庇护所区域 (左侧) - 较安全的腐败土地
-	if x < SHELTER_END_X:
-		return TerrainType.CORRUPT
-	
-	# 农田区域 (中间) - 可种植区域
-	if x >= FARM_START_X and x <= FARM_END_X:
-		# 预留一些通道
-		if y >= -3 and y <= 3:
-			return TerrainType.FARM
-		return TerrainType.CORRUPT
-	
-	# 净化路径 (右侧) - 充满障碍
-	if x > FARM_END_X and x < PATH_END_X:
-		# 随机生成障碍物
-		if _should_place_obstacle(x, y):
-			return TerrainType.OBSTACLE
-		return TerrainType.CORRUPT
-	
-	# 净化树区域
-	if x >= PATH_END_X:
-		return TerrainType.CORRUPT
-	
-	return TerrainType.CORRUPT
+## 记录所有手工铺设的原始地形信息
+func _record_original_terrain() -> void:
+	var used_cells = base_layer.get_used_cells()
+	for cell in used_cells:
+		var source_id = base_layer.get_cell_source_id(cell)
+		var atlas_coords = base_layer.get_cell_atlas_coords(cell)
+		original_terrain[cell] = {
+			"source_id": source_id,
+			"atlas_coords": atlas_coords
+		}
 
-## 判断是否放置障碍物 (伪随机)
-func _should_place_obstacle(x: int, y: int) -> bool:
-	# 使用简单的伪随机，避免在中心通道放障碍
-	if abs(y) <= 1:
-		return false
-	var seed_val = x * 7 + y * 13
-	return (seed_val % 5) == 0
-
-## 设置地块
-func _set_tile(x: int, y: int, terrain: int) -> void:
-	var base_coord := Vector2i(1, 1)  # 默认草地
-	var obstacle_coord := Vector2i(-1, -1)  # 默认无障碍物
-	
-	match terrain:
-		TerrainType.CORRUPT:
-			base_coord = Vector2i(1, 1)
-		TerrainType.FARM:
-			base_coord = Vector2i(1, 1)  # 后续替换为耕地贴图
-			farm_plots[Vector2i(x, y)] = {"tilled": false, "watered": false}
-		TerrainType.OBSTACLE:
-			base_coord = Vector2i(1, 1)  # 基础层仍为草地
-			obstacle_coord = Vector2i(0, 0)  # 障碍物使用不同贴图
-			# 为障碍物添加物理碰撞
-			_set_obstacle_collision(x, y)
-	
-	# 设置基础层
-	base_layer.set_cell(Vector2i(x, y), 0, base_coord)
-	
-	# 设置障碍物层
-	if obstacle_coord.x >= 0:
-		obstacle_layer.set_cell(Vector2i(x, y), 0, obstacle_coord)
-
-## 设置障碍物碰撞
-func _set_obstacle_collision(x: int, y: int) -> void:
-	"""为障碍物设置物理碰撞，玩家无法通过"""
-	var tile_data = PhysicsPointQueryParameters2D.new()
-	# 障碍物会被 TileSet 的 physics_layer_0 自动处理
-	# 这里只需要在 TileSet 中配置好物理层即可
+## 获取某个坐标点在手工铺设时的原始地形信息
+func get_original_terrain(pos: Vector2i) -> Dictionary:
+	return original_terrain.get(pos, {})
 
 ## 设置净化树
 func _setup_purification_tree() -> void:
 	# 标记净化树位置
-	purification_tree.set_meta("type", "purification_target")
-	purification_tree.set_meta("active", false)
+	if purification_tree:
+		purification_tree.set_meta("type", "purification_target")
+		purification_tree.set_meta("active", false)
 
 ## 触发净化效果 (公开接口)
 func trigger_purification() -> void:
@@ -130,9 +67,11 @@ func trigger_purification() -> void:
 
 ## 生成净化后的地形
 func _generate_purified_layer() -> void:
-	for x in range(-MAP_WIDTH / 2, MAP_WIDTH / 2):
-		for y in range(-MAP_HEIGHT / 2, MAP_HEIGHT / 2):
-			purified_layer.set_cell(Vector2i(x, y), 0, Vector2i(1, 1))
+	# 根据基础层的地块范围生成对应的净化层草地
+	var used_cells = base_layer.get_used_cells()
+	for cell in used_cells:
+		# source_id = 0 是净化层配置的草地
+		purified_layer.set_cell(cell, 0, Vector2i(0, 0))
 
 ## 创建净化视觉特效
 func _create_purge_effect() -> void:

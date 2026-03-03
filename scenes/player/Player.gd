@@ -121,31 +121,41 @@ func update_animation(dir: Vector2) -> void:
                 action_point.position = Vector2(0, -ACTION_DISTANCE)
 
 # ==========================================
-# 挖地功能
+# 挖地功能 (将格子挖空)
 # ==========================================
 func dig_ground() -> void:
-    var tilemap = get_parent().get_node_or_null("TileMapLayer")
+    var tilemap = get_parent().get_node_or_null("BaseLayer")
     if tilemap != null:
         var target_pos = action_point.global_position
         # 把绝对坐标转换成 TileMapLayer 自己的内部坐标
         var local_pos = tilemap.to_local(target_pos)
         var grid_pos = tilemap.local_to_map(local_pos)
-        tilemap.set_cell(grid_pos, -1)
+        
+        # 只要这里原本有东西（非空），就将其挖空 (-1)
+        if tilemap.get_cell_source_id(grid_pos) != -1:
+            tilemap.set_cell(grid_pos, -1)
 
 # ==========================================
-# 填地功能
+# 填地功能 (从空地恢复为地图原始形态)
 # ==========================================
 func build_ground() -> void:
-    var tilemap = get_parent().get_node_or_null("TileMapLayer")
-    if tilemap != null:
+    var tilemap = get_parent().get_node_or_null("BaseLayer")
+    var map_root = get_parent()
+    
+    if tilemap != null and map_root.has_method("get_original_terrain"):
         var target_pos = action_point.global_position
         var local_pos = tilemap.to_local(target_pos)
         var grid_pos = tilemap.local_to_map(local_pos)
         
-        # 使用 get_cell_source_id 检查该坐标有没有放东西
-        # 如果返回值是 -1，说明这个格子是空的
+        # 只有在当前格子是空的时候，才允许填地恢复
         if tilemap.get_cell_source_id(grid_pos) == -1:
-            tilemap.set_cells_terrain_connect([grid_pos], 0, 0)
+            # 向地图脚本请求该坐标最初的地形配置
+            var original = map_root.get_original_terrain(grid_pos)
+            if not original.is_empty():
+                var source_id = original.get("source_id", -1)
+                var atlas_coords = original.get("atlas_coords", Vector2i(0, 0))
+                # 重新填回原始地形和对应的图集坐标
+                tilemap.set_cell(grid_pos, source_id, atlas_coords)
 
 # ==========================================
 # 属性修改函数
